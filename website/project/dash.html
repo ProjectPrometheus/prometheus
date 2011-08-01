@@ -1,0 +1,82 @@
+<div><!-- Header --></div>
+
+<div>
+    <h1>{{ proj.name }}</h1>
+    <!-- Tabs like file / manilla folders -->
+    <div><a href="project/dash.html">Dash</a></div>
+    <div><a href="project/milestones.html">Milestones</a></div>
+    <div><a href="project/tasks.html">Tasks</a></div>
+    <div><a href="project/discussions.html">Discussion</a></div>
+
+    <!-- Project Description / Summary -->
+    <div id="projectDiscription">
+        {{ proj.summary }}
+    </div>
+
+    <!-- Project News Feed -->
+    <div id="news">
+
+    </div>
+
+    <!-- Project Tasks -->
+    <div id="projectTasks">
+<!--        {% IF this project has tasks THEN %} -->
+<!--        Display "No Tasks" -->
+<!--        {% ELSE %} -->
+        <table>
+            <tr>
+                <th>Id <a href="">^</a><a href="">v</a></th>
+                <th>Summary <a href="">^</a><a href="">v</a></th>
+                <th>Type <a href="">^</a><a href="">v</a></th>
+                <th>Priority <a href="">^</a><a href="">v</a></th>
+                <th>Status <a href="">^</a><a href="">v</a></th>
+                <th>Owner <a href="">^</a><a href="">v</a></th>
+                <th>Created <a href="">^</a><a href="">v</a></th>
+                <th>Due <a href="">^</a><a href="">v</a></th>
+            </tr>
+            {% for task in project.task_set.all %}
+            <tr>
+                <td><a href="project/task/{{ task.Id }}"># {{ task.id }}</a></td>
+                <!-- Should limit the summary down to save space.
+                    Ex) 
+                        IF summary.length > 15 THEN
+                            summary.substring(0,15) + "..."
+                        ELSE
+                            summary
+                -->
+                <td>{{ task.summary }}</td>
+                <td>{{ task.taskType }}</td>
+                <td>{{ task.priority }}</td>
+                <td>{{ task.status }}</td>
+                <td>{{ task.owner }}</td>
+                <td>{{ task.postedTime }}</td>
+                <td>{{ task.dueDate }}</td>
+           </tr>
+           {% endfor %}
+        </table>
+<!--        END ELSE -->
+    </div>
+</div>
+
+<div id="projectLinks">
+    <h2>Project Links</h2>
+    <!-- IF this project is NOT Private THEN -->
+    <img src=""> <a href="project/join.html">Join</a>
+    <!-- ELSE -->
+    <img src=""> <a href="project/request.html">Request to Join</a>
+    <img src=""> <a href="project/follow.html">Follow</a>
+    <img src=""> <a href="project/sendmsg.html">Message</a>
+    <!-- IF this user is an Admin for THIS Project THEN -->
+    <img src=""> <a href="project/admin/settings.html">Settings</a>
+</div>
+
+<div id="projectMembers">
+    <h3>Members</h3>
+    <!-- IF this project is NOT Private THEN -->
+    {% for member in proj.projectmember_set.all %}
+        <a href="user/{{ member.id }}">{{ member.name}}</a>
+    {% endfor %}
+    <!-- ELSE -->
+</div>
+
+<div><!-- Footer --></div>
