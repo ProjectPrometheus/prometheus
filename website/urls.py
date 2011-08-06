@@ -4,7 +4,7 @@ from django.conf.urls.defaults import *
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns('project.views',
     # Example:
     # (r'^website/', include('website.foo.urls')),
 
@@ -13,4 +13,15 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),
+    (r'^project/', 'index'),
+    (r'^project/add', 'add'),
+    (r'^project/(?P<project_id>\d+)/$', 'dash'),
+    (r'^project/(?P<project_id>\d+)/edit/$', 'edit'),
+    (r'^project/(?P<project_id>\d+)/tasks/$', 'tasks'),
+    (r'^project/(?P<project_id>\d+)/milestones/$', 'milestones'),
+    (r'^project/(?P<project_id>\d+)/milestones/(?P<mile_id>\d+)/$', 'miletone')
+)
+
+urlpatters = patterns('',
+    
 )

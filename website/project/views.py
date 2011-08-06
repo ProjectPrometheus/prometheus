@@ -10,24 +10,33 @@ def index(request):
     return HttpResponse()
 
 # The "Home Page" or "Dashboard" of an individual project
-def dash(request, proj_id):
-    project = get_object_or_404(Project, pk = proj_id)
+require_http_methods(["GET"])
+def dash(request, project_id):
+    project = get_object_or_404(Project, pk = project_id)
     return render_to_response('project/dash.html', {'proj': project})
 
-def edit(request, proj_id):
+require_http_methods(["GET"])
+def edit(request, project_id):
     # IF this person has the authority to edit this project THEN
 
     # ELSE redirect to permission error page
-    project = get_object_or_404(Project, pk = proj_id)
+    project = get_object_or_404(Project, pk = project_id)
     return render_to_response('project/edit.html', {'proj': project})
     
+require_http_methods(["GET"])
 def search(request, search):
     return HttpResponse()
 
-def milestones(request, proj_id):
-    p_miles = get_list_or_404(Milestone, projectId = proj_id)
+require_http_methods(["GET"])
+def milestones(request, project_id):
+    p_miles = get_list_or_404(Milestone, projectId = project_id)
     return render_to_response('project/milstones.html', {'miles': p_miles})
 
-def tasks(request, proj_id):
-    p_tasks = get_list_or_404(Task, projectId = proj_id)
+require_http_methods(["GET"])
+def tasks(request, project_id):
+    p_tasks = get_list_or_404(Task, projectId = project_id)
     return render_to_response('project/tasks.html', {'tasks': p_tasks})
+
+require_http_methods(["GET"])
+def add(request):
+    return render_to_response('project/add.html', {})
